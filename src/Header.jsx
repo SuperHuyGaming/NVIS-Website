@@ -4,13 +4,14 @@ import Button from "@mui/material/Button";
 
 export default function Header() {
 	const sx = {
-		color: "grey",
+		color: "black",
 		backgroundColor: "#ffd700",
 		borderColor: "#bd2626",
 
 		"&:hover": {
 			backgroundColor: "#DAF5FF",
 			color: "#2192FF",
+			fontWeight: "bold",
 		},
 	};
 
