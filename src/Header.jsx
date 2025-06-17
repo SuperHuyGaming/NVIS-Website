@@ -4,8 +4,9 @@ import Button from "@mui/material/Button";
 
 export default function Header() {
 	const sx = {
-		color: "black",
+		color: "grey",
 		backgroundColor: "#ffd700",
+		borderColor: "#bd2626",
 
 		"&:hover": {
 			backgroundColor: "#DAF5FF",
@@ -23,9 +24,6 @@ export default function Header() {
 				</Button>
 				<Button className="HeaderButton" variant="outlined" sx={sx}>
 					About us
-				</Button>
-				<Button className="HeaderButton" variant="outlined" sx={sx}>
-					Contacts
 				</Button>
 			</div>
 		</header>

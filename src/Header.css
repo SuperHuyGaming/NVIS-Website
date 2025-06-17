@@ -8,7 +8,7 @@
 	align-items: center;
 	padding: 1rem;
 	gap: 1rem;
-	background-color:#bd2626 ;
+	background-color: #bd2626;
 	z-index: 999;
 	box-sizing: border-box;
 	margin: 0;
@@ -22,8 +22,8 @@
 
 .HeaderButton {
 	margin-left: 1rem;
-	border-color: #e35807;
-	text-decoration-color: red;
+	border-color: #bd2626;
+	text-decoration-color: #bd2626;
 }
 
 .Logo {
@@ -32,5 +32,4 @@
 	border-radius: 15%;
 	cursor: pointer;
 	margin-left: -2rem;
-	
 }
