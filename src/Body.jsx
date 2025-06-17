@@ -5,21 +5,21 @@ import News from "./News.jsx";
 function Body() {
 	const newsItems = [
 		{
-			src: "./assets/GingerCat.jpg",
+			src: "/GingerCat.jpg",
 			title: "Pretty Ginger Cat Seen On Highway!",
 			category: "ANIMALS",
 			author: "Huy Truong",
 			date: "June 19, 2020",
 		},
 		{
-			src: "./assets/VietnamFlag.png",
+			src: "/VietnamFlag.png",
 			title: "Vietnam Flag Raised On Independence Day!",
 			category: "NEWS",
 			author: "John Doe",
 			date: "September 2, 2023",
 		},
 		{
-			src: "./assets/FatherDay.png",
+			src: "/FatherDay.png",
 			title: "Happy Father's Day Celebrations Worldwide!",
 			category: "EVENTS",
 			author: "Emma Smith",

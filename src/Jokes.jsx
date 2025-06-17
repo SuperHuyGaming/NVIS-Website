@@ -4,7 +4,6 @@ import "./Header.css";
 import Button from "@mui/material/Button";
 
 export default function Jokes() {
-	const colors = require("colors");
 	const sx = {
 		color: "black",
 		backgroundColor: "#DDDDDD",
@@ -34,7 +33,7 @@ export default function Jokes() {
 			>
 				Click here for dad's joke!
 			</Button>
-			{joke && <h3>{joke.rainbow}</h3>}
+			{joke && <h3>{joke}</h3>}
 		</div>
 	);
 }
