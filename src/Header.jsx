@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 export default function Header() {
 	const sx = {
 		color: "black",
-		backgroundColor: "#DDDDDD",
+		backgroundColor: "#ffd700",
 
 		"&:hover": {
 			backgroundColor: "#DAF5FF",
@@ -15,7 +15,8 @@ export default function Header() {
 
 	return (
 		<header className="Header">
-			<img src="./library/nvisLogo.png" className="Logo" alt="Logo" />
+			<img src="/logo.png" className="Logo" alt="Logo" />
+
 			<div className="Buttons">
 				<Button className="HeaderButton" variant="outlined" sx={sx}>
 					Home
