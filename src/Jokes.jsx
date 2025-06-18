@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Header.css";
 import Button from "@mui/material/Button";
@@ -13,6 +13,7 @@ export default function Jokes() {
 			color: "#2192FF",
 		},
 	};
+
 	const [joke, setJoke] = useState("");
 	async function findJoke() {
 		try {
@@ -20,9 +21,13 @@ export default function Jokes() {
 				headers: { Accept: "application/json" },
 			});
 			setJoke(apiLink.data.joke);
-		} catch (e) {}
+		} catch (e) {
+			console.error("Failed to fetch joke:", e);
+		}
 	}
-
+	useEffect(() => {
+		findJoke();
+	}, []);
 	return (
 		<div>
 			<Button
@@ -33,7 +38,7 @@ export default function Jokes() {
 			>
 				Click here for dad's joke!
 			</Button>
-			{joke && <h3>{joke}</h3>}
+			<h3>{joke}</h3>
 		</div>
 	);
 }
