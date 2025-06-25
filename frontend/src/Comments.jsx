@@ -11,7 +11,6 @@ function Comments() {
 		});
 	};
 	const handleSubmit = async (evt) => {
-		evt.preventDefault();
 		try {
 			const res = await axios.post(
 				"http://localhost:3000/comments",
@@ -19,7 +18,6 @@ function Comments() {
 			);
 			alert(res.data.message);
 			setComment({ username: "", comment: "" });
-			fetchComments();
 		} catch (err) {
 			console.error("Can not post comments", err);
 			alert("Failed to add comment.");
