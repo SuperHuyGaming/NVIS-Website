@@ -2,14 +2,28 @@ import Body from "./Body";
 import Header from "./Header";
 import Jokes from "./Jokes";
 import Comments from "./Comments";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SingleNewsPage from "./SingleNewsPage";
 
 export default function App() {
 	return (
-		<div className="App">
+		<BrowserRouter>
 			<Header />
-			<Body />
-			<Jokes />
-			<Comments />
-		</div>
+			<Routes>
+				{/* Home page */}
+				<Route
+					path="/"
+					element={
+						<>
+							<Body />
+							<Jokes />
+							<Comments />
+						</>
+					}
+				/>
+				{/* Single news article page */}
+				<Route path="/news/cats" element={<SingleNewsPage />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }

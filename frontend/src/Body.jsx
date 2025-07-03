@@ -1,6 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import News from "./News.jsx";
+import { Link } from "react-router-dom";
 
 function Body() {
 	const newsItems = [
@@ -32,14 +33,16 @@ function Body() {
 			<h1 style={{ textAlign: "center" }}>News and Updates</h1>
 			<div>
 				{newsItems.map((item, index) => (
-					<News
-						key={index}
-						src={item.src}
-						title={item.title}
-						category={item.category}
-						author={item.author}
-						date={item.date}
-					/>
+					<Link to={"/news/cats"}>
+						<News
+							key={index}
+							src={item.src}
+							title={item.title}
+							category={item.category}
+							author={item.author}
+							date={item.date}
+						/>
+					</Link>
 				))}
 			</div>
 		</Box>

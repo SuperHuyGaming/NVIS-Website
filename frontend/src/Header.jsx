@@ -1,6 +1,7 @@
 import "./Header.css";
 import * as React from "react";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 export default function Header() {
 	const sx = {
@@ -20,9 +21,12 @@ export default function Header() {
 			<img src="/logo.png" className="Logo" alt="Logo" />
 
 			<div className="Buttons">
-				<Button className="HeaderButton" variant="outlined" sx={sx}>
-					Home
-				</Button>
+				<Link to={"/"}>
+					<Button className="HeaderButton" variant="outlined" sx={sx}>
+						Home
+					</Button>
+				</Link>
+
 				<Button className="HeaderButton" variant="outlined" sx={sx}>
 					About us
 				</Button>
