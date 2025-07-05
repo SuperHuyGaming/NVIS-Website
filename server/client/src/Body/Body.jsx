@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import News from "./News.jsx";
+import News from "./News/News.jsx";
 import { Link } from "react-router-dom";
 
 function Body() {
