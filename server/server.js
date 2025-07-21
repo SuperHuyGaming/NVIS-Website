@@ -5,14 +5,12 @@ import News from "./model/data.js";
 import dotenv from "dotenv";
 dotenv.config();
 
-mongoose
-	.connect(process.env.MONGO_URI)
-	.then(() => {
-		console.log("MONGO OPEN!");
-	})
-	.catch((err) => {
-		console.error("MONGO ERRR", err);
-	});
+if (!mongoose.connection.readyState) {
+	mongoose
+		.connect(process.env.MONGO_URI)
+		.then(() => console.log("MONGO OPEN!"))
+		.catch((err) => console.error("MONGO ERRR", err));
+}
 const PORT = process.env.PORT || 3003;
 const comments = [];
 const app = express();
@@ -27,6 +25,7 @@ app.use(cors());
 app.get("/news", async (req, res) => {
 	try {
 		const news = await News.find({});
+		console.log("Fetched news:", news); // log this!
 		res.json(news);
 	} catch (e) {
 		console.log("Error getting all news", e);
@@ -43,15 +42,16 @@ app.get("/news/:id", async (req, res) => {
 	}
 });
 
-app.post("/post/new", (req, res) => {
+app.post("/post/new", async (req, res) => {
 	const { post } = req.body;
-	let exists = books.some((bookFromArray) => bookFromArray.id === book.id);
-
-	if (exists) return res.status(400).json({ ok: false });
-
-	books.push(book);
-
-	res.json(book);
+	try {
+		const newPost = new News(post);
+		await newPost.save();
+		res.status(201).json(newPost);
+	} catch (e) {
+		console.error("Error saving new post", e);
+		res.status(500).json({ error: "Failed to save post" });
+	}
 });
 
 // app.get("*", (req, res) => {

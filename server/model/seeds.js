@@ -1,8 +1,10 @@
 import News from "./data.js";
 import mongoose from "mongoose";
-
+import dotenv from "dotenv";
+dotenv.config();
+const PORT = process.env.PORT || 3003;
 mongoose
-	.connect("mongodb://localhost:27017/newsPost")
+	.connect(process.env.MONGO_URI)
 	.then(() => {
 		console.log("MONGO OPEN!");
 	})

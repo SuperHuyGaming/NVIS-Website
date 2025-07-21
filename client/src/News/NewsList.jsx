@@ -10,7 +10,6 @@ const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 function NewsList() {
 	const { state } = useLocation();
 	const [news, setNews] = useState([]);
-
 	useEffect(() => {
 		if (state) {
 			// handle location state result
@@ -22,6 +21,7 @@ function NewsList() {
 			try {
 				const response = await axios.get(`${BASE_URL}/news`);
 				setNews(response.data);
+				console.log(response.data);
 			} catch (e) {
 				console.log("Error fetching news posts", e);
 			}
