@@ -1,36 +1,29 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import News from "./model/data.js";
 import dotenv from "dotenv";
+import News from "./model/data.js";
+
 dotenv.config();
 
-if (!mongoose.connection.readyState) {
-	mongoose
-		.connect(process.env.MONGO_URI)
-		.then(() => console.log("MONGO OPEN!"))
-		.catch((err) => console.error("MONGO ERRR", err));
-}
-const PORT = process.env.PORT || 3003;
-const comments = [];
 const app = express();
-app.use(express.json());
+const PORT = process.env.PORT || 3003;
 
 app.use(cors());
+app.use(express.json());
 
-// Serve frontend files
-// app.use(express.static(path.join(__dirname, "/client/dist")));
-
-// Render client
+// Routes
 app.get("/news", async (req, res) => {
 	try {
 		const news = await News.find({});
-		console.log("Fetched news:", news); // log this!
+		console.log("Fetched news:", news);
 		res.json(news);
 	} catch (e) {
-		console.log("Error getting all news", e);
+		console.error("Error getting all news", e);
+		res.status(500).json({ error: "Failed to fetch news" });
 	}
 });
+
 app.get("/news/:id", async (req, res) => {
 	try {
 		const post = await News.findById(req.params.id);
@@ -54,10 +47,15 @@ app.post("/post/new", async (req, res) => {
 	}
 });
 
-// app.get("*", (req, res) => {
-// 	res.sendFile(path.join(__dirname, "/client/dist/index.html"));
-// });
-
-app.listen(PORT, () => {
-	console.log(`Listening on port ${PORT}`);
-});
+// Connect to MongoDB and start server
+mongoose
+	.connect(process.env.MONGO_URI)
+	.then(() => {
+		console.log(" Connected to MongoDB");
+		app.listen(PORT, () => {
+			console.log(` Server running on port ${PORT}`);
+		});
+	})
+	.catch((err) => {
+		console.error(" MongoDB connection error:", err);
+	});
