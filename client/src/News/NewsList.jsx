@@ -19,7 +19,9 @@ function NewsList() {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await axios.get(`${BASE_URL}/news`);
+				const response = await axios.get(
+					"https://nvis-backend.onrender.com/news"
+				);
 				setNews(response.data);
 				console.log(response.data);
 			} catch (e) {
