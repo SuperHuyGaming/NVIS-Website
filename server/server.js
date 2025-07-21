@@ -2,15 +2,18 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import News from "./model/data.js";
+import dotenv from "dotenv";
+dotenv.config();
+
 mongoose
-	.connect("mongodb://localhost:27017/newsPost")
+	.connect(process.env.MONGO_URI)
 	.then(() => {
 		console.log("MONGO OPEN!");
 	})
 	.catch((err) => {
 		console.error("MONGO ERRR", err);
 	});
-const PORT = 3003;
+const PORT = process.env.PORT || 3003;
 const comments = [];
 const app = express();
 app.use(express.json());
@@ -39,7 +42,6 @@ app.get("/news/:id", async (req, res) => {
 		res.status(500).json({ error: "Failed to fetch post" });
 	}
 });
-
 
 app.post("/post/new", (req, res) => {
 	const { post } = req.body;

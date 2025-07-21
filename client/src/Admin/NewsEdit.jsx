@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+
+
 const StyledForm = styled.form`
 	background-color: wheat;
 	border-radius: 5px;
@@ -79,7 +83,7 @@ export default function NewsEdit({ isEdit }) {
 		async () => {
 			try {
 				const posted = await axios.post(
-					"http://localhost:3001/post/new",
+					`${BASE_URL}/post/new`,
 					{ post: formFields }
 				);
 				alert("Post created!");

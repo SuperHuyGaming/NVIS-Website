@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
 import SingleNewsPage from "./SingleNewsPage.jsx";
-
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 function NewsList() {
 	const { state } = useLocation();
 	const [news, setNews] = useState([]);
@@ -20,7 +20,7 @@ function NewsList() {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await axios.get("http://localhost:3003/news");
+				const response = await axios.get(`${BASE_URL}/news`);
 				setNews(response.data);
 			} catch (e) {
 				console.log("Error fetching news posts", e);

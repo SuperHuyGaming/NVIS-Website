@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import dayjs from "dayjs";
 import styled from "styled-components";
-
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 // Styled Components
 const Container = styled.div`
 	max-width: 700px;
@@ -66,9 +66,7 @@ function SingleNewsPage() {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await axios.get(
-					`http://localhost:3003/news/${id}`
-				);
+				const response = await axios.get(`${BASE_URL}/news/${id}`);
 				setPost(response.data);
 			} catch (e) {
 				console.error("Error fetching single news post", e);
