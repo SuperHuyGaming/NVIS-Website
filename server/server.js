@@ -1,41 +1,61 @@
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
-
-// Resolve __dirname in ESM
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-
+import News from "./model/data.js";
+mongoose
+	.connect("mongodb://localhost:27017/newsPost")
+	.then(() => {
+		console.log("MONGO OPEN!");
+	})
+	.catch((err) => {
+		console.error("MONGO ERRR", err);
+	});
+const PORT = 3003;
+const comments = [];
 const app = express();
-
 app.use(express.json());
+
 app.use(cors());
 
 // Serve frontend files
 // app.use(express.static(path.join(__dirname, "/client/dist")));
 
-const comments = [
-	{ username: "htruon5", comment: "Lol that's dope!" },
-	{ username: "SuperHuyGaming", comment: "ggwp" },
-	{ username: "alwayssaydope", comment: "Dope Dope Dope Dope!" },
-	{ username: "donald", comment: "trump" },
-];
 // Render client
-
-app.get("/comments", (req, res) => {
-	res.json(comments);
+app.get("/news", async (req, res) => {
+	try {
+		const news = await News.find({});
+		res.json(news);
+	} catch (e) {
+		console.log("Error getting all news", e);
+	}
 });
+app.get("/news/:id", async (req, res) => {
+	try {
+		const post = await News.findById(req.params.id);
+		if (!post) return res.status(404).json({ error: "Post not found" });
+		res.json(post);
+	} catch (e) {
+		console.error("Error fetching single post", e);
+		res.status(500).json({ error: "Failed to fetch post" });
+	}
+});
+
+
+app.post("/post/new", (req, res) => {
+	const { post } = req.body;
+	let exists = books.some((bookFromArray) => bookFromArray.id === book.id);
+
+	if (exists) return res.status(400).json({ ok: false });
+
+	books.push(book);
+
+	res.json(book);
+});
+
 // app.get("*", (req, res) => {
 // 	res.sendFile(path.join(__dirname, "/client/dist/index.html"));
 // });
-app.post("/comments", (req, res) => {
-	const { username, comment } = req.body;
-	comments.push({ username, comment });
-	res.status(201).json({ message: "Comment added." });
-});
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`);
 });
